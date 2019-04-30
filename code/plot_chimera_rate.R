@@ -5,26 +5,26 @@ library(cowplot)
 polymerase_colors <- brewer.pal(5, "RdBu")
 polymerase_colors[3] <- "darkgray"
 
-facet_names <- c(
-									'percentage' = "Total chimeras (%)",
-									'sensitivity' = "Sensitivity (%)",
-									'specificity' = "Specificity (%)"
-								)
+facet_names <- c( percentage = "Total chimeras (%)",
+									specificity = "Specificity (%)",
+									sensitivity = "Sensitivity (%)")
 
 mock <- read_tsv("data/process/error_chimera_rates.tsv") %>%
 	mutate(percentage = 100 * pc_frac_chimera,
 					sensitivity = 100 * vsearch_sens,
 					specificity = 100 * vsearch_spec) %>%
-	select(rounds, polymerase, percentage, sensitivity, specificity) %>%
-	gather(per_sens_spec, value, percentage, sensitivity, specificity) %>%
+	select(rounds, polymerase, percentage, specificity, sensitivity) %>%
+	gather(per_spec_sens, value, percentage, specificity, sensitivity) %>%
+	mutate(per_spec_sens = factor(per_spec_sens,
+					levels=c("percentage", "specificity", "sensitivity"))) %>%
 	ggplot(aes(x=rounds, y=value, color=polymerase)) +
 		geom_line(size=1) +
 		geom_blank(aes(y = 0)) +
-		facet_wrap(~per_sens_spec, scales="free_y", labeller = as_labeller(facet_names), strip.position="left") +
+		facet_wrap(~per_spec_sens, scales="free_y", labeller = as_labeller(facet_names), strip.position="left") +
 		labs(y=NULL, x="Number of rounds of PCR") +
 		scale_color_manual(name=NULL,
 												breaks=c("ACC", "K", "PHU", "PL", "Q5"),
-												labels=c("Accuprime", "Kappa", "Phusion", "Platinum", "Q5"),
+												labels=c("Accuprime", "KAPA", "Phusion", "Platinum", "Q5"),
 												values=polymerase_colors) +
 		theme_classic() +
 		theme(
@@ -39,7 +39,7 @@ mock <- read_tsv("data/process/error_chimera_rates.tsv") %>%
 
 facet_names <- c(
 									'ACC' = "Accuprime",
-									'K' = "Kappa",
+									'K' = "KAPA",
 									'PHU' = "Phusion",
 									'PL' = "Platinum",
 									'Q5' = "Q5"

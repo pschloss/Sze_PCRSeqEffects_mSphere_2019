@@ -23,7 +23,7 @@ new_fasta_file_name <- str_replace(fasta_file_name, "fasta", "perfect.fasta")
 
 fasta_file <- scan(fasta_file_name, sep="\n", what=character(), quiet=T)
 tibble(query = fasta_file[c(TRUE, FALSE)], sequence = fasta_file[c(FALSE, TRUE)]) %>%
-	mutate(query = str_replace(query, ">(.*)\\t$", "\\1")) %>%
+	mutate(query = str_replace(query, ">(.*)\\t?$", "\\1")) %>%
 	inner_join(., good_seqs, by="query") %>%
 	mutate(output = paste0(">", query, "\n", sequence)) %>%
 	pull(output) %>%

@@ -4,7 +4,7 @@ library(RColorBrewer)
 
 polymerase_names <- c(
 									'ACC' = "Accuprime",
-									'K' = "Kappa",
+									'K' = "KAPA",
 									'PHU' = "Phusion",
 									'PL' = "Platinum",
 									'Q5' = "Q5"
@@ -33,7 +33,7 @@ alpha <- read_tsv("data/process/mock_alpha_diversity.tsv") %>%
 	scale_color_manual(
 		name=NULL,
 		breaks=c("no_error", "perfect", "vsearch"),
-		labels=c("No errors or\nchimeras", "Errors and\nperfect chimera\nremoval", "Errors and\nchimera removal\nwith VSEARCH"),
+		labels=c("No errors or\nchimeras", "Residual errors,\ncomplete chimera\nremoval", "Residual errors,\nchimera removal\nwith VSEARCH"),
 		values=brewer.pal(3, "Set2")
 	) +
 	theme_classic() +
@@ -68,7 +68,7 @@ rel_distance <- read_tsv("data/process/mock_beta_diversity.tsv") %>%
 		)
 
 
-label_positions <- tibble(x=c(-0.08, 0, 0.08, 0.16), y=c(0.12, 0.086, 0.088, 0.04), round = c('20', '25', '30', '35'), label=c('20 rounds', '25 rounds', '30 rounds', '35 rounds'))
+label_positions <- tibble(x=c(-0.08, 0, 0.08, 0.16), y=c(0.12, 0.086, 0.09, 0.04), round = c('20', '25', '30', '35'), label=c('20 rounds', '25 rounds', '30 rounds', '35 rounds'))
 
 pcoa <- read_tsv("data/mothur/mock.trim.contigs.good.unique.good.filter.unique.pick.pick.precluster.vsearch.opti_mcc.braycurtis.0.03.lt.ave.pcoa.axes") %>%
 	select(group, axis1, axis2) %>%
@@ -79,7 +79,7 @@ pcoa <- read_tsv("data/mothur/mock.trim.contigs.good.unique.good.filter.unique.p
 		stat_ellipse(aes(group=rounds), show.legend=FALSE) +
 		geom_text(data = label_positions, aes(x, y, label=label, color=round), inherit.aes=FALSE, show.legend=FALSE, size=3) +
 		scale_shape(name=NULL, labels=polymerase_names) +
-		scale_color_manual(name=NULL, values=brewer.pal(4, "Set1")) +
+		scale_color_manual(name=NULL, values=brewer.pal(4, "PuOr")) +
 		guides(color=FALSE) +
 		labs(x="PCo Axis 1", y="PCo Axis 2") +
 		theme_classic() +

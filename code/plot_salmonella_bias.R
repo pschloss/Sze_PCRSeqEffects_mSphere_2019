@@ -9,10 +9,10 @@ read_tsv("data/process/mock_bias_salmonella.tsv") %>%
 		geom_hline(aes(yintercept=6), col="gray") +
 		geom_line(size=1) +
 		coord_cartesian(ylim=c(4,8)) +
-		labs(y="Ratio of relative abundances\nfor each operon", x="Number of rounds of PCR") +
+		labs(y="Ratio of relative abundance\nof dominant and rare oprons", x="Number of rounds of PCR") +
 		scale_color_manual(name=NULL,
 												breaks=c("ACC", "K", "PHU", "PL", "Q5"),
-												labels=c("Accuprime", "Kappa", "Phusion", "Platinum", "Q5"),
+												labels=c("Accuprime", "KAPA", "Phusion", "Platinum", "Q5"),
 												values=polymerase_colors) +
 		theme_classic() +
 		theme(

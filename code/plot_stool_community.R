@@ -4,7 +4,7 @@ library(RColorBrewer)
 
 polymerase_names <- c(
 									'ACC' = "Accuprime",
-									'K' = "Kappa",
+									'K' = "KAPA",
 									'PHU' = "Phusion",
 									'PL' = "Platinum",
 									'Q5' = "Q5"
@@ -33,7 +33,7 @@ alpha <- read_tsv("data/process/stool_alpha_diversity.tsv") %>%
 		name=NULL,
 		# breaks=c("no_error", "perfect", "vsearch"),
 		# labels=c("No errors or\nchimeras", "Errors and\nperfect chimera\nremoval", "Errors and\nchimera removal\nwith VSEARCH"),
-		values=brewer.pal(4, "Set2")
+		values=brewer.pal(5, "Set1")[-3]
 	) +
 	theme_classic() +
 	theme(
@@ -80,8 +80,9 @@ pcoa <- read_tsv("data/mothur/stool.trim.contigs.good.unique.good.filter.unique.
 		geom_point() +
 		geom_text(data = label_positions, aes(x, y, label=label), inherit.aes=FALSE, show.legend=FALSE, size=3) +
 		scale_shape(name=NULL, labels=polymerase_names) +
-		scale_color_manual(name=NULL, labels=c("20 rounds", "25 rounds", "30 rounds", "35 rounds"), values=brewer.pal(4, "Set1")) +
+		scale_color_manual(name=NULL, labels=c("20 rounds", "25 rounds", "30 rounds", "35 rounds"), values=brewer.pal(4, "PuOr")) +
 		guides(fill=FALSE) +
+		guides(color=guide_legend(override.aes=list(shape=15, size=4))) +
 		labs(x="PCo Axis 1", y="PCo Axis 2") +
 		theme_classic() +
 		theme(
@@ -89,6 +90,7 @@ pcoa <- read_tsv("data/mothur/stool.trim.contigs.good.unique.good.filter.unique.
 			legend.position = c(0.28, 0.18),
 			legend.key.height = unit(0.8, "line"),
 			legend.key.size = unit(0.06, "cm"),
+			legend.background=element_blank(),
 			legend.margin = margin(0,0,0,0)
 		)
 

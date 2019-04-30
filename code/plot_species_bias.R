@@ -22,7 +22,7 @@ mock %>%
 		labs(y="Relative abundance (%)", x="Number of rounds of PCR") +
 		scale_color_manual(name=NULL,
 												breaks=c("ACC", "K", "PHU", "PL", "Q5"),
-												labels=c("Accuprime", "Kappa", "Phusion", "Platinum", "Q5"),
+												labels=c("Accuprime", "KAPA", "Phusion", "Platinum", "Q5"),
 												values=polymerase_colors) +
 		theme_classic() +
 		theme(strip.text=element_text(face="italic"),

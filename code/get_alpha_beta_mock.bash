@@ -1,5 +1,5 @@
 SHARED=$1 #data/mothur/mock.trim.contigs.good.unique.good.filter.unique.pick.pick.precluster.perfect.opti_mcc.shared
-SUBSAMPLE=1000
+SUBSAMPLE=700
 
 cut -f 2 $SHARED | grep "DNA" | sed -E "s/((.*)_DNA.)/\1\t\2/" > data/mothur/merge.file
 

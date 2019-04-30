@@ -34,7 +34,7 @@ bind_rows(mock, stool) %>%
 		coord_cartesian(ylim=c(0,0.6)) +
 		scale_color_manual(name=NULL,
 												breaks=c("ACC", "K", "PHU", "PL", "Q5"),
-												labels=c("Accuprime", "Kappa", "Phusion", "Platinum", "Q5"),
+												labels=c("Accuprime", "KAPA", "Phusion", "Platinum", "Q5"),
 												values=polymerase_colors) +
 		labs(y=NULL, x="Number of rounds of PCR") +
 		theme_classic() +

@@ -275,6 +275,12 @@ data/process/vegan_stool.tsv data/process/vegan_mock.tsv : code/vegan_analysis.R
 		data/mothur/stool.trim.contigs.good.unique.good.filter.unique.precluster.pick.pick.opti_mcc.braycurtis.0.03.lt.ave.dist
 	Rscript code/vegan_analysis.R
 
+data/process/chimera_overlap_density.tsv data/process/chimera_overlap_frequency.tsv : \
+		code/chimera_analysis.R\
+		data/mothur/mock.trim.contigs.good.unique.good.filter.unique.pick.pick.precluster.count_table\
+		data/mothur/mock.trim.contigs.good.unique.good.filter.unique.pick.pick.precluster.error.summary
+	Rscript code/chimera_analysis.R
+
 ################################################################################
 #
 # Part 6: Figure generation
@@ -326,17 +332,22 @@ results/figures/drift.pdf : code/plot_drift.R\
 submission/figure_1.eps : results/figures/mock_error.pdf
 	pdf2ps $< $@
 
+
 submission/figure_2.eps : results/figures/chimera_plots.pdf
 	pdf2ps $< $@
+
 
 submission/figure_3.eps : results/figures/species_bias.pdf
 	pdf2ps $< $@
 
+
 submission/figure_4.eps : results/figures/mock_community.pdf
 	pdf2ps $< $@
 
+
 submission/figure_5.eps : results/figures/stool_community.pdf
 	pdf2ps $< $@
+
 
 submission/figure_6.eps : results/figures/drift.pdf
 	pdf2ps $< $@
@@ -345,24 +356,45 @@ submission/figure_6.eps : results/figures/drift.pdf
 submission/figure_s1.eps : results/figures/salmonella_bias.pdf
 	pdf2ps $< $@
 
+
 figures : submission/figure_1.eps submission/figure_2.eps submission/figure_3.eps\
 					submission/figure_4.eps submission/figure_5.eps submission/figure_6.eps\
 					submission/figure_s1.eps
 
 
-submission/manuscript.pdf : \
-						figures\
+submission/manuscript.pdf submission/manuscript.md submission/manuscript.tex : \
 						data/process/error_chimera_rates.tsv\
+						data/process/chimera_overlap_frequency.tsv\
+						data/process/chimera_overlap_density.tsv\
 						data/process/mock_bias_salmonella.tsv\
 						data/process/mock_beta_diversity.tsv\
-						data/process/vegan_stool.tsv\
-						data/process/stool_beta_diversity.tsv\
 						data/process/vegan_mock.tsv\
+						data/process/stool_beta_diversity.tsv\
+						data/process/vegan_stool.tsv\
+						data/process/mock_beta_drift.csv\
 						submission/mbio.csl\
 						submission/references.bib\
 						submission/manuscript.Rmd
-	R -e 'library(rmarkdown); render("submission/manuscript.Rmd", clean=FALSE)'
+	R -e "library(rmarkdown); render('submission/manuscript.Rmd', clean=FALSE)"
 	mv submission/manuscript.knit.md submission/manuscript.md
 	rm submission/manuscript.utf8.md
 
 
+submission/manuscript.docx : submission/manuscript.md
+	pandoc $< -o $@
+
+
+submission/marked_up.pdf : submission/manuscript.tex
+	#module load perl-modules latexdiff/1.2.0
+	git cat-file -p 6adb4c388158ab59:submission/manuscript.tex | sed -e 's/pschloss@umich.edu/\\texttt{pschloss@umich.edu}/' > submission/manuscript_old.tex
+	latexdiff submission/manuscript_old.tex submission/manuscript.tex > submission/marked_up.tex
+	pdflatex -output-directory=submission submission/marked_up.tex
+	rm submission/marked_up.aux
+	rm submission/marked_up.log
+	rm submission/marked_up.out
+	rm submission/marked_up.tex
+	rm submission/manuscript_old.tex
+
+
+submission/response_to_reviewers.pdf : submission/response_to_reviewers.md
+	pandoc -s --include-in-header=submission/header.tex -V geometry:margin=1in -o $@ $<
