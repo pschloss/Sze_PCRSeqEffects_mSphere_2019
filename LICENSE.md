@@ -1,6 +1,6 @@
 The MIT License (MIT)
 
-Copyright (c) 2017 Marc A. Sze and Patrick D. Schloss
+Copyright (c) 2019 Marc A. Sze and Patrick D. Schloss
 
 
 
