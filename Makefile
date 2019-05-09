@@ -380,7 +380,7 @@ submission/manuscript.pdf submission/manuscript.md submission/manuscript.tex : \
 	rm submission/manuscript.utf8.md
 
 
-submission/manuscript.docx : submission/manuscript.md
+submission/manuscript.docx : submission/manuscript.tex
 	pandoc $< -o $@
 
 
