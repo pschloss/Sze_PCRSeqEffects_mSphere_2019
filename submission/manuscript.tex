@@ -384,7 +384,7 @@ number of operons in its genome. The vendor of the mock community
 subjects each lot of genomic DNA to shotgun sequencing to more
 accurately quantify the actual abundance of each organism in the
 community. It should be noted that this approach to quantifying
-abundance is also not without its own biases, but does provide an
+abundance is also not without its own biases (40), but does provide an
 alternative approach to characterizing the structure of the mock
 community. We compared the vendor reported relative abundance of the 16S
 rRNA genes from each bacterium in the mock community to the data we
@@ -533,7 +533,7 @@ relative and not absolute terms. Furthermore, care must be taken to not
 directly compare or pool samples from different studies. Instead, it is
 important to statistically model the study-based variation as has been
 done in recent meta-analyses that compared relative effect sizes or
-pooled data using a mixed effects statistical model (40, 41).
+pooled data using a mixed effects statistical model (41, 42).
 
 The observed sequencing error rates and alpha diversity metrics followed
 the manufacturers' measurements of their polymerases' fidelity (Figure
@@ -548,8 +548,8 @@ These benefits were most accentuated at 35 cycles. However, in our
 experience and despite efforts to optimize the yield with the KAPA
 polymerase, the reactions typically had a high proportion of
 primer-dimer products and low yield of correctly-sized products.
-Although the error rate for with the Accuprime polymerase was not as low
-as that with KAPA, we consider it to be an acceptable alternative.
+Although the error rate with the Accuprime polymerase was not as low as
+that with KAPA, we consider it to be an acceptable alternative.
 Considering polymerase development is an active area of commercial
 development with potential new polymerases becoming available, it is
 important for researchers to understand how changing the polymerase
@@ -565,9 +565,9 @@ amplification of one fragment over another have included guanine and
 cytosine composition, length, flanking DNA composition, amount of DNA
 shearing, and number of rounds of PCR (24, 27--33). These factors may
 become exacerbated if PCR is performed on multiple samples that vary in
-their concentration (42). In addition, environmental and reagent
+their concentration (43). In addition, environmental and reagent
 contaminants can also have a significant impact on the analysis of low
-biomass samples (43). Less well understood is the effect of phylogenetic
+biomass samples (44). Less well understood is the effect of phylogenetic
 diversity on bias and chimera formation. Communities with low
 phylogenetic diversity may be more prone to chimera formation since
 chimeras are more likely to form among closely related sequences (14,
@@ -585,21 +585,21 @@ Even with these strategies it is impossible to remove all PCR artifacts.
 Beyond the imperfections of the best polymerases, sometimes difficult to
 lyse organisms require stringent lysis steps and low biomass samples
 require additional rounds of PCR. A host of bioinformatics tools are
-available for removing residual sequencing errors (18, 44--46). Other
+available for removing residual sequencing errors (18, 45--47). Other
 tools are available for removing chimeras (14, 35) where there is a
 trade off between the sensitivity of detecting chimeras and the
 specificity of correctly calling a sequence a chimera. In recent years,
 parameters for these algorithms have been changed to increase their
 sensitivity with little evaluation of the effects on the specificity of
-the algorithms (44, 46). Others recommend removing any read that has an
+the algorithms (45, 47). Others recommend removing any read that has an
 abundance below a specified threshold as a tool to remove PCR and
 sequencing artifacts (e.g.~removing all sequences that only appear once)
-(20, 44--46). This method must be approached with caution as such
+(20, 45--47). This method must be approached with caution as such
 approaches are likely to introduce a different bias of the community
 representation and ignore the fact, as we showed, that artifacts may be
 quite abundant and reproducible. Ultimately, researchers must test their
 hypotheses with multiple methods to validate the claims they reach with
-any one method (47). All methods have biases and limitations and we must
+any one method (48). All methods have biases and limitations and we must
 use complementary methods to obtain robust results.
 
 \newpage
@@ -621,7 +621,7 @@ determined using shotgun metagenomic sequencing
 (\url{https://github.com/SchlossLab/Sze_PCRSeqEffects_mSphere_2019/data/references/ZRC187325.pdf}).
 
 \textbf{\emph{Human samples.}} Fecal samples were obtained from 4
-individuals who were part of an earlier study (48). These samples were
+individuals who were part of an earlier study (49). These samples were
 collected using a protocol approved by the University of Michigan
 Institutional Review Board. For this study, the samples were
 de-identified. DNA was extracted from the fecal samples using the
@@ -653,7 +653,7 @@ were sequenced using the Illumina MiSeq sequencing platform to generate
 paired 250-nt reads.
 
 \textbf{\emph{Sequence processing.}} The mothur software program (v
-1.41) was used for all sequence processing steps (49). The protocol has
+1.41) was used for all sequence processing steps (50). The protocol has
 been previously published (18)
 (\url{https://www.mothur.org/wiki/MiSeq_SOP}). Briefly, paired reads
 were assembled using mothur's make.contigs command to correct errors
@@ -663,7 +663,7 @@ gene, or appeared to be a contaminant were removed from subsequent
 analyses. Sequences were further denoised using mothur's pre.cluster
 command to merge the counts of sequences that were within 2 nt of a more
 abundant sequence. The VSEARCH implementation of UCHIME was used to
-screen for chimeras (35, 50). At various stages in the sequence
+screen for chimeras (35, 51). At various stages in the sequence
 processing pipeline for the mock community data, the mothur seq.error
 command was used to quantify the sequencing error rate as well as the
 true chimera rate. This command uses the true sequences from the mock
@@ -681,13 +681,13 @@ obtained from the ZymoBIOMICS\textsuperscript{TM} Microbial Community
 DNA Standard protocol
 (\url{https://web.archive.org/web/20181221151905/https://www.zymoresearch.com/media/amasty/amfile/attach/_D6305_D6306_ZymoBIOMICS_Microbial_Community_DNA_Standard_v1.1.3.pdf}).
 Sequences were assigned to operational taxonomic units (OTUs) at a
-threshold of 3\% dissimilarity using the OptiClust algorithm (51). To
+threshold of 3\% dissimilarity using the OptiClust algorithm (52). To
 adjust for unequal sequencing when measuring alpha and beta diversity,
 all samples were rarefied for downstream analysis. The Good's coverage
 for the samples was routinely greater than 95\%.
 
 \textbf{\emph{Statistical analysis.}} All analysis was done with the R
-(v 3.5.1) software package (52). Data transformation and graphing were
+(v 3.5.1) software package (53). Data transformation and graphing were
 completed using the tidyverse package (v 1.2.1). The distance matrix
 data was analyzed using the adonis function within the vegan package (v
 2.5.4).
@@ -1005,19 +1005,24 @@ doi:\href{https://doi.org/10.1038/nbt.3601}{10.1038/nbt.3601}.
 amplicons. BMC Bioinformatics \textbf{12}:38.
 doi:\href{https://doi.org/10.1186/1471-2105-12-38}{10.1186/1471-2105-12-38}.
 
+\leavevmode\hypertarget{ref-Nayfach2016}{}%
+40. \textbf{Nayfach S}, \textbf{Pollard KS}. 2016. Toward accurate and
+quantitative comparative metagenomics. Cell \textbf{166}:1103--1116.
+doi:\href{https://doi.org/10.1016/j.cell.2016.08.007}{10.1016/j.cell.2016.08.007}.
+
 \leavevmode\hypertarget{ref-Sze2016}{}%
-40. \textbf{Sze MA}, \textbf{Schloss PD}. 2016. Looking for a signal in
+41. \textbf{Sze MA}, \textbf{Schloss PD}. 2016. Looking for a signal in
 the noise: Revisiting obesity and the microbiome. mBio \textbf{7}.
 doi:\href{https://doi.org/10.1128/mbio.01018-16}{10.1128/mbio.01018-16}.
 
 \leavevmode\hypertarget{ref-Sze2018}{}%
-41. \textbf{Sze MA}, \textbf{Schloss PD}. 2018. Leveraging existing 16S
+42. \textbf{Sze MA}, \textbf{Schloss PD}. 2018. Leveraging existing 16S
 rRNA gene surveys to identify reproducible biomarkers in individuals
 with colorectal tumors. mBio \textbf{9}.
 doi:\href{https://doi.org/10.1128/mbio.00630-18}{10.1128/mbio.00630-18}.
 
 \leavevmode\hypertarget{ref-Multinu2018}{}%
-42. \textbf{Multinu F}, \textbf{Harrington SC}, \textbf{Chen J},
+43. \textbf{Multinu F}, \textbf{Harrington SC}, \textbf{Chen J},
 \textbf{Jeraldo PR}, \textbf{Johnson S}, \textbf{Chia N},
 \textbf{Walther-Antonio MR}. 2018. Systematic bias introduced by genomic
 DNA template dilution in 16S rRNA gene-targeted microbiota profiling in
@@ -1025,7 +1030,7 @@ human stool homogenates. mSphere \textbf{3}.
 doi:\href{https://doi.org/10.1128/msphere.00560-17}{10.1128/msphere.00560-17}.
 
 \leavevmode\hypertarget{ref-Salter2014}{}%
-43. \textbf{Salter SJ}, \textbf{Cox MJ}, \textbf{Turek EM},
+44. \textbf{Salter SJ}, \textbf{Cox MJ}, \textbf{Turek EM},
 \textbf{Calus ST}, \textbf{Cookson WO}, \textbf{Moffatt MF},
 \textbf{Turner P}, \textbf{Parkhill J}, \textbf{Loman NJ},
 \textbf{Walker AW}. 2014. Reagent and laboratory contamination can
@@ -1034,19 +1039,19 @@ critically impact sequence-based microbiome analyses. BMC Biology
 doi:\href{https://doi.org/10.1186/s12915-014-0087-z}{10.1186/s12915-014-0087-z}.
 
 \leavevmode\hypertarget{ref-Callahan2016}{}%
-44. \textbf{Callahan BJ}, \textbf{McMurdie PJ}, \textbf{Rosen MJ},
+45. \textbf{Callahan BJ}, \textbf{McMurdie PJ}, \textbf{Rosen MJ},
 \textbf{Han AW}, \textbf{Johnson AJA}, \textbf{Holmes SP}. 2016. DADA2:
 High-resolution sample inference from illumina amplicon data. Nature
 Methods \textbf{13}:581--583.
 doi:\href{https://doi.org/10.1038/nmeth.3869}{10.1038/nmeth.3869}.
 
 \leavevmode\hypertarget{ref-Edgar2016}{}%
-45. \textbf{Edgar RC}. 2016. UNOISE2: Improved error-correction for
+46. \textbf{Edgar RC}. 2016. UNOISE2: Improved error-correction for
 illumina 16S and ITS amplicon sequencing.
 doi:\href{https://doi.org/10.1101/081257}{10.1101/081257}.
 
 \leavevmode\hypertarget{ref-Amir2017a}{}%
-46. \textbf{Amir A}, \textbf{McDonald D}, \textbf{Navas-Molina JA},
+47. \textbf{Amir A}, \textbf{McDonald D}, \textbf{Navas-Molina JA},
 \textbf{Kopylova E}, \textbf{Morton JT}, \textbf{Xu ZZ},
 \textbf{Kightley EP}, \textbf{Thompson LR}, \textbf{Hyde ER},
 \textbf{Gonzalez A}, \textbf{Knight R}. 2017. Deblur rapidly resolves
@@ -1054,20 +1059,20 @@ single-nucleotide community sequence patterns. mSystems \textbf{2}.
 doi:\href{https://doi.org/10.1128/msystems.00191-16}{10.1128/msystems.00191-16}.
 
 \leavevmode\hypertarget{ref-Schloss2018}{}%
-47. \textbf{Schloss PD}. 2018. Identifying and overcoming threats to
+48. \textbf{Schloss PD}. 2018. Identifying and overcoming threats to
 reproducibility, replicability, robustness, and generalizability in
 microbiome research. mBio \textbf{9}.
 doi:\href{https://doi.org/10.1128/mbio.00525-18}{10.1128/mbio.00525-18}.
 
 \leavevmode\hypertarget{ref-Seekatz2016}{}%
-48. \textbf{Seekatz AM}, \textbf{Rao K}, \textbf{Santhosh K},
+49. \textbf{Seekatz AM}, \textbf{Rao K}, \textbf{Santhosh K},
 \textbf{Young VB}. 2016. Dynamics of the fecal microbiome in patients
 with recurrent and nonrecurrent clostridium difficile infection. Genome
 Medicine \textbf{8}.
 doi:\href{https://doi.org/10.1186/s13073-016-0298-8}{10.1186/s13073-016-0298-8}.
 
 \leavevmode\hypertarget{ref-Schloss2009}{}%
-49. \textbf{Schloss PD}, \textbf{Westcott SL}, \textbf{Ryabin T},
+50. \textbf{Schloss PD}, \textbf{Westcott SL}, \textbf{Ryabin T},
 \textbf{Hall JR}, \textbf{Hartmann M}, \textbf{Hollister EB},
 \textbf{Lesniewski RA}, \textbf{Oakley BB}, \textbf{Parks DH},
 \textbf{Robinson CJ}, \textbf{Sahl JW}, \textbf{Stres B},
@@ -1079,19 +1084,19 @@ communities. Applied and Environmental Microbiology
 doi:\href{https://doi.org/10.1128/aem.01541-09}{10.1128/aem.01541-09}.
 
 \leavevmode\hypertarget{ref-Rognes2016}{}%
-50. \textbf{Rognes T}, \textbf{Flouri T}, \textbf{Nichols B},
+51. \textbf{Rognes T}, \textbf{Flouri T}, \textbf{Nichols B},
 \textbf{Quince C}, \textbf{Mahé F}. 2016. VSEARCH: A versatile open
 source tool for metagenomics. PeerJ \textbf{4}:e2584.
 doi:\href{https://doi.org/10.7717/peerj.2584}{10.7717/peerj.2584}.
 
 \leavevmode\hypertarget{ref-Westcott2017}{}%
-51. \textbf{Westcott SL}, \textbf{Schloss PD}. 2017. OptiClust, an
+52. \textbf{Westcott SL}, \textbf{Schloss PD}. 2017. OptiClust, an
 improved method for assigning amplicon-based sequence data to
 operational taxonomic units. mSphere \textbf{2}:e00073--17.
 doi:\href{https://doi.org/10.1128/mspheredirect.00073-17}{10.1128/mspheredirect.00073-17}.
 
 \leavevmode\hypertarget{ref-r_citation_2018}{}%
-52. \textbf{R Core Team}. 2018. R: A language and environment for
+53. \textbf{R Core Team}. 2018. R: A language and environment for
 statistical computing. R Foundation for Statistical Computing, Vienna,
 Austria.
 
